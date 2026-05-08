@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NHE SERVER OFFLINE</title>
+    <title>NHE UID FREE TRIAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Social Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff0055; /* Red for Offline */
-            --secondary: #ff4d00;
+            --primary: #00ffcc;
+            --secondary: #00d4ff;
             --danger: rgba(255, 0, 85, 0.8);
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.15);
-            --glow: 0 0 20px rgba(255, 0, 85, 0.2);
+            --glow: 0 0 20px rgba(0, 255, 204, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
@@ -33,13 +31,13 @@
         .bg-animate {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, #1a0505 0%, #030305 100%);
+            background: radial-gradient(circle at 20% 30%, #1a1a2e 0%, #030305 100%);
             z-index: -1;
         }
         .orb {
             position: absolute;
             width: 300px; height: 300px;
-            background: var(--primary);
+            background: var(--secondary);
             filter: blur(120px);
             opacity: 0.15;
             border-radius: 50%;
@@ -60,9 +58,9 @@
             position: relative;
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
             z-index: 1;
-            text-align: center;
         }
 
+        /* Header Section with Left Logo */
         .header-container {
             display: flex;
             align-items: center;
@@ -72,13 +70,19 @@
         }
 
         .panel-logo {
-            width: 80px; height: 80px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%; 
             border: 2px solid var(--primary);
             padding: 5px;
             filter: drop-shadow(0 0 10px var(--primary));
             object-fit: cover;
             background: rgba(0, 0, 0, 0.3);
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
         }
 
         .status-header {
@@ -106,58 +110,95 @@
             -webkit-text-fill-color: transparent; 
         }
 
-        .offline-notice {
-            background: rgba(255, 0, 85, 0.1);
-            border: 1px solid var(--primary);
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 13px;
-            color: #ffb3c1;
-            margin-bottom: 25px;
-            line-height: 1.4;
-        }
-
-        /* Social Dock */
-        .social-dock {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
+        /* Form Styling */
+        .input-box { width: 100%; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            padding: 14px 20px;
+            border-radius: 12px;
             color: white;
-            font-size: 20px;
-            text-decoration: none;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.4s ease;
+        }
+        input:focus { border-color: var(--secondary); background: rgba(255, 255, 255, 0.07); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
+
+        .day-selector { display: flex; gap: 10px; margin-bottom: 25px; }
+        .day-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: #ccc;
+            font-family: 'Orbitron';
+            font-size: 9px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .day-btn:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+        .day-btn.active {
+            background: var(--secondary);
+            color: #000;
+            border: none;
+            font-weight: 900;
+            box-shadow: 0 8px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--danger), #ff003c);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Orbitron';
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 0, 85, 0.3); }
 
-        .social-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(255, 0, 85, 0.2);
-        }
-
-        .yt:hover { color: #ff0000; }
-        .ds:hover { color: #5865F2; }
-        .tg:hover { color: #0088cc; }
-
+        /* Developer Footer */
         .dev-footer {
             margin-top: 25px;
+            text-align: center;
             font-family: 'Orbitron';
             font-size: 10px;
             letter-spacing: 3px;
             color: rgba(255, 255, 255, 0.4);
         }
-        .dev-footer span { color: var(--primary); }
+        .dev-footer span {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Loader & Result */
+        #loader-screen, #success-screen { display: none; text-align: center; }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.05);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: left;
+            border: 1px solid var(--glass-border);
+            margin: 20px 0;
+        }
+        .result-box p { margin-bottom: 8px; font-size: 13px; color: #bbb; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 4px; }
+        .result-box b { color: var(--primary); float: right; font-family: 'Orbitron'; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -165,38 +206,92 @@
     <div class="bg-animate"><div class="orb"></div></div>
 
     <div class="card">
-        <div class="header-container">
-            <img src="logo.png" class="panel-logo" alt="NHE FREE TRIAL">
-            <div class="header-text">
-                <div class="status-header">
-                    <div class="dot"></div> SERVER OFFLINE
+        <!-- MAIN DASHBOARD -->
+        <div id="main-dashboard">
+            <div class="header-container">
+                <img src="logo.png" class="panel-logo" alt="NHE">
+                
+                <div class="header-text">
+                    <div class="status-header">
+                        <div class="dot"></div> SERVER ACTIVE
+                    </div>
+                    <h1>NHE UID TRIAL</h1>
                 </div>
-                <h1>NHE</h1>
             </div>
+            
+            <div class="input-box"><input type="text" id="name" placeholder="GAME ID NAME"></div>
+            <div class="input-box"><input type="number" id="uid" placeholder="GAME UID"></div>
+            
+            <div class="day-selector">
+                <button class="day-btn" onclick="setDay(this, '1 DAY')">1 DAY</button>
+                <button class="day-btn" onclick="setDay(this, '2 DAYS')">2 DAYS</button>
+                <button class="day-btn" onclick="setDay(this, '3 DAYS')">3 DAYS</button>
+            </div>
+            
+            <button class="submit-btn" onclick="handleProcess()">FREE ACCESS</button>
+            
+            <!-- Dev Credit -->
+            <div class="dev-footer">Dev <span>&lt;/&gt;</span> KILLER</div>
         </div>
 
-        <div class="offline-notice">
-            <b>SECURITY PROTOCOL ACTIVE:</b><br>
-            Server is currently undergoing maintenance. Access to UID Injection is temporarily restricted.
+        <!-- LOADER -->
+        <div id="loader-screen">
+            <div class="spinner"></div>
+            <h2 style="font-family: 'Orbitron'; color: var(--secondary); letter-spacing: 2px;">UID ACCESS RUNNING...</h2>
+            <p style="margin-top: 15px; color: #777; font-size: 13px;">Linking to NHE Secure Cloud</p>
         </div>
-        
-        <p style="font-size: 12px; color: #666; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">Follow for Updates</p>
 
-        <!-- SOCIAL LINKS SECTION -->
-        <div class="social-dock">
-            <a href="https://www.youtube.com/@NextHiddenElite" target="_blank" class="social-btn yt">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://discord.gg/QWMpcrHSF" target="_blank" class="social-btn ds">
-                <i class="fa-brands fa-discord"></i>
-            </a>
-            <a href="https://t.me/+mWnSOBZmLyE1OTk1" target="_blank" class="social-btn tg">
-                <i class="fa-brands fa-telegram"></i>
-            </a>
+        <!-- SUCCESS -->
+        <div id="success-screen">
+            <h1 style="color: var(--primary); -webkit-text-fill-color: var(--primary); text-align: center; margin-bottom: 10px;">GRANTED</h1>
+            <div class="result-box" id="summary"></div>
+            <button class="submit-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);" onclick="location.reload()">BACK TO DASHBOARD</button>
+            <div class="dev-footer">Dev <span>&lt;/&gt;</span> ᴋɪʟʟᴇʀ</div>
         </div>
-        
-        <div class="dev-footer">Dev <span>&lt;/&gt;</span> KILLER</div>
     </div>
 
+    <script>
+        let selectedTime = "";
+
+        function setDay(btn, val) {
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedTime = val;
+        }
+
+        function handleProcess() {
+            const name = document.getElementById("name").value;
+            const uid = document.getElementById("uid").value;
+
+            if(!name || !uid || !selectedTime) {
+                alert("CRITICAL ERROR: Authorization Failed!");
+                return;
+            }
+
+            const botToken = "8475138855:AAFQMWnAHUJqGsx06QZFw60lXugY15ynkig"; 
+            const chatId = "8135816344";      
+            const text = `💎 **GLASS INJECTION** 💎\n\n👤 **OP:** ${name}\n🆔 **UID:** ${uid}\n⏳ **VAL:** ${selectedTime}\n📡 **ST:** GRANTED\n👨‍💻 **DEV:** ᴋɪʟʟᴇʀ`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
+            });
+
+            document.getElementById("main-dashboard").style.display = "none";
+            document.getElementById("loader-screen").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("loader-screen").style.display = "none";
+                document.getElementById("success-screen").style.display = "block";
+                document.getElementById("summary").innerHTML = `
+                    <p>GAME ID NAME <b>${name}</b></p>
+                    <p>GAME UID <b>${uid}</b></p>
+                    <p>DURATION <b>${selectedTime}</b></p>
+                    <p>PROTOCOL <b>NHE V0.4.0</b></p>
+                `;
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
