@@ -9,639 +9,409 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root {
-            --primary: #00ffcc;
-            --secondary: #00d4ff;
-            --danger: #ff0055;
-            --glass-border: rgba(255,255,255,0.1);
-            --card-shadow: 0 0 30px rgba(0,255,204,0.15);
+        :root{
+            --primary:#00ffcc;
+            --secondary:#00d4ff;
+            --danger:#ff0055;
+            --glass-border:rgba(255,255,255,0.1);
+            --card-shadow:0 0 30px rgba(0,255,204,0.15);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani',sans-serif;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Rajdhani',sans-serif;
         }
 
-        body {
-            background: #030305;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 20px;
-            overflow-x: hidden;
+        body{
+            background:#030305;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            padding:20px;
+            overflow-x:hidden;
         }
 
-        .bg-animate {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, #0a1128 0%, #030305 100%);
-            z-index: -1;
-            overflow: hidden;
+        .bg-animate{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:radial-gradient(circle at 20% 30%, #0a1128 0%, #030305 100%);
+            z-index:-1;
+            overflow:hidden;
         }
 
-        .orb {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: var(--secondary);
-            filter: blur(140px);
-            opacity: .15;
-            border-radius: 50%;
-            animation: move 12s infinite alternate ease-in-out;
+        .orb{
+            position:absolute;
+            width:500px;
+            height:500px;
+            background:var(--secondary);
+            filter:blur(140px);
+            opacity:.15;
+            border-radius:50%;
+            animation:move 12s infinite alternate ease-in-out;
         }
 
-        @keyframes move {
-            0% {
-                transform: translate(-10%,-10%);
-            }
-
-            100% {
-                transform: translate(60%,40%);
-            }
+        @keyframes move{
+            0%{ transform:translate(-10%,-10%); }
+            100%{ transform:translate(60%,40%); }
         }
 
-        .card {
-            width: 100%;
-            max-width: 450px;
-            background: rgba(10,10,15,0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 30px;
-            position: relative;
-            box-shadow: var(--card-shadow);
-            z-index: 1;
+        .card{
+            width:100%;
+            max-width:450px;
+            background:rgba(10,10,15,0.85);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--glass-border);
+            border-radius:25px;
+            padding:30px;
+            position:relative;
+            box-shadow:var(--card-shadow);
+            z-index:1;
         }
 
-            .card::before {
-                content: '';
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                background: linear-gradient(45deg,var(--primary),transparent,var(--secondary));
-                z-index: -1;
-                border-radius: 26px;
-                animation: borderFlow 6s linear infinite;
-                opacity: .4;
-            }
-
-        @keyframes borderFlow {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-
-            100% {
-                filter: hue-rotate(360deg);
-            }
+        .card::before{
+            content:'';
+            position:absolute;
+            top:-2px; left:-2px; right:-2px; bottom:-2px;
+            background:linear-gradient(45deg,var(--primary),transparent,var(--secondary));
+            z-index:-1;
+            border-radius:26px;
+            animation:borderFlow 6s linear infinite;
+            opacity:.4;
         }
 
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+        @keyframes borderFlow{
+            0%{ filter:hue-rotate(0deg); }
+            100%{ filter:hue-rotate(360deg); }
         }
 
-        .logo-wrapper {
-            width: 85px;
-            height: 85px;
-            flex-shrink: 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .header-container{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            margin-bottom:25px;
         }
 
-            .logo-wrapper::before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                background: linear-gradient( 45deg, #00ffcc, #00d4ff, #ff0055, #00ffcc );
-                background-size: 400% 400%;
-                animation: neonRotate 6s linear infinite;
-                padding: 3px;
-                z-index: -1;
-                filter: blur(2px);
-            }
-
-            .logo-wrapper::after {
-                content: '';
-                position: absolute;
-                inset: 6px;
-                background: rgba(0,0,0,0.7);
-                border-radius: 50%;
-                border: 1px solid rgba(255,255,255,0.08);
-                z-index: -1;
-                backdrop-filter: blur(8px);
-            }
-
-        .panel-logo {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.15);
-            animation: logoPulse 3s ease-in-out infinite;
+        .logo-wrapper{
+            width:85px; height:85px;
+            flex-shrink:0;
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
 
-        @keyframes neonRotate {
-            0% {
-                background-position: 0% 50%;
-                transform: rotate(0deg);
-            }
-
-            100% {
-                background-position: 400% 50%;
-                transform: rotate(360deg);
-            }
+        .logo-wrapper::before{
+            content:'';
+            position:absolute;
+            width:100%; height:100%;
+            border-radius:50%;
+            background:linear-gradient(45deg,#00ffcc,#00d4ff,#ff0055,#00ffcc);
+            background-size:400% 400%;
+            animation:neonRotate 6s linear infinite;
+            padding:3px;
+            z-index:-1;
+            filter:blur(2px);
         }
 
-        @keyframes logoPulse {
-            0%,100% {
-                transform: scale(1);
-                box-shadow: 0 0 15px #00ffcc;
-            }
-
-            50% {
-                transform: scale(1.08);
-                box-shadow: 0 0 35px #00d4ff;
-            }
-        }
-       
-        h1 {
-            font-family: 'Orbitron';
-            font-size: 22px;
-            background: linear-gradient(to right,#fff,var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo-wrapper::after{
+            content:'';
+            position:absolute;
+            inset:6px;
+            background:rgba(0,0,0,0.7);
+            border-radius:50%;
+            border:1px solid rgba(255,255,255,0.08);
+            z-index:-1;
+            backdrop-filter:blur(8px);
         }
 
-        .status-header {
-            font-family: 'Orbitron';
-            font-size: 10px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 5px;
+        .panel-logo{
+            width:72px; height:72px;
+            border-radius:50%;
+            object-fit:cover;
+            border:2px solid rgba(255,255,255,0.15);
+            animation:logoPulse 3s ease-in-out infinite;
         }
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: blink 1s infinite;
+        @keyframes neonRotate{
+            0%{ background-position:0% 50%; transform:rotate(0deg); }
+            100%{ background-position:400% 50%; transform:rotate(360deg); }
         }
 
-        @keyframes blink {
-            0%,100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: .2;
-            }
+        @keyframes logoPulse{
+            0%,100%{ transform:scale(1); box-shadow:0 0 15px #00ffcc; }
+            50%{ transform:scale(1.08); box-shadow:0 0 35px #00d4ff; }
         }
 
-        input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 14px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            color: white;
-            outline: none;
+        h1{
+            font-family:'Orbitron';
+            font-size:22px;
+            background:linear-gradient(to right,#fff,var(--secondary));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
-        .select-wrapper {
-            position: relative;
-            margin-bottom: 15px;
+        .status-header{
+            font-family:'Orbitron';
+            font-size:10px;
+            display:flex;
+            align-items:center;
+            gap:6px;
+            margin-bottom:5px;
         }
 
-        select {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 14px;
-            border-radius: 12px;
-            color: white;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
+        .dot{
+            width:8px; height:8px;
+            border-radius:50%;
+            animation:blink 1s infinite;
         }
 
-            select option {
-                background: #0d1117;
-                color: white;
-            }
+        .online-status { color: var(--primary); }
+        .offline-status { color: var(--danger); }
+        .dot.online { background: var(--primary); }
+        .dot.offline { background: var(--danger); }
 
-        .select-wrapper::after {
-            content: '\f107';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            color: var(--primary);
-            pointer-events: none;
+        @keyframes blink{ 0%,100%{ opacity:1; } 50%{ opacity:.2; } }
+
+        input, select{
+            width:100%;
+            background:rgba(255,255,255,0.05);
+            border:1px solid var(--glass-border);
+            padding:14px;
+            margin-bottom:15px;
+            border-radius:12px;
+            color:white;
+            outline:none;
         }
 
-        .day-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+        .day-selector{
+            display:flex; gap:10px; margin-bottom:20px;
         }
 
-        .day-btn {
-            flex: 1;
-            padding: 12px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: #fff;
-            font-family: 'Orbitron';
-            font-size: 11px;
-            cursor: pointer;
-            transition: .3s;
+        .day-btn{
+            flex:1; padding:12px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid var(--glass-border);
+            border-radius:10px;
+            color:#fff;
+            font-family:'Orbitron';
+            font-size:11px;
+            cursor:pointer;
+            transition:.3s;
         }
 
-            .day-btn.active {
-                background: var(--primary);
-                color: #000;
-                font-weight: 900;
-                box-shadow: 0 0 20px var(--primary);
-            }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg,var(--danger),#ff1a66);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Orbitron';
-            font-weight: 700;
-            cursor: pointer;
-            transition: .3s;
+        .day-btn.active{
+            background:var(--primary);
+            color:#000;
+            font-weight:900;
+            box-shadow:0 0 20px var(--primary);
         }
 
-            .submit-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 0 25px rgba(255,0,85,0.4);
-            }
-
-        .social-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        .submit-btn{
+            width:100%; padding:16px;
+            background:linear-gradient(135deg,var(--danger),#ff1a66);
+            color:white;
+            border:none; border-radius:12px;
+            font-family:'Orbitron';
+            font-weight:700;
+            cursor:pointer;
+            transition:.3s;
         }
 
-        .social-icon {
-            color: white;
-            font-size: 20px;
-            transition: .4s;
-        }
-
-            .social-icon:hover {
-                color: var(--primary);
-                transform: translateY(-5px);
-            }
-
-        .dev-footer {
-            font-size: 10px;
-            text-align: center;
-            margin-top: 20px;
+        .submit-btn:disabled{
+            background: #333;
             color: #777;
-            font-family: 'Orbitron';
+            cursor: not-allowed;
+            box-shadow: none;
         }
 
-            .dev-footer span {
-                color: var(--primary);
-            }
-
-        #loader-screen,
-        #success-screen {
-            display: none;
-            text-align: center;
-            padding: 20px 0;
+        .social-container{
+            display:flex; justify-content:center; gap:20px;
+            margin-top:25px; padding-top:20px;
+            border-top:1px solid rgba(255,255,255,0.1);
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            margin: 20px auto;
-            animation: spin 1s linear infinite;
+        .social-icon{ color:white; font-size:20px; transition:.4s; }
+        .social-icon:hover{ color:var(--primary); transform:translateY(-5px); }
+
+        #loader-screen, #success-screen{ display:none; text-align:center; padding:20px 0; }
+
+        .spinner{
+            width:50px; height:50px;
+            border:4px solid rgba(255,255,255,0.1);
+            border-top-color:var(--primary);
+            border-radius:50%;
+            margin:20px auto;
+            animation:spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin{ 100%{ transform:rotate(360deg); } }
     </style>
 </head>
 
 <body>
 
-    <div class="bg-animate">
-        <div class="orb"></div>
+<div class="bg-animate">
+    <div class="orb"></div>
+</div>
+
+<div class="card">
+    <div id="main-dashboard">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <img src="https://via.placeholder.com/150/00ffcc/000000?text=NHE" class="panel-logo" alt="Logo">
+            </div>
+            <div class="header-text">
+                <div id="server-status-box" class="status-header">
+                    <div id="status-dot" class="dot"></div>
+                    <span id="status-label">CHECKING...</span>
+                </div>
+                <h1>NHE UID TRIAL</h1>
+            </div>
+        </div>
+
+        <input type="text" id="name" placeholder="ENTER GAME NAME">
+        <input type="number" id="uid" placeholder="ENTER GAME UID">
+
+        <select id="server">
+            <option value="" disabled selected>SELECT SERVER</option>
+            <option value="BANGLADESH BD">BANGLADESH BD</option>
+            <option value="INDIA IN">INDIA IN</option>
+            <option value="PAKISTAN PAK">PAKISTAN PAK</option>
+            <option value="SINGAPORE SG">SINGAPORE SG</option>
+            <option value="BRAZIL BR">BRAZIL BR</option>
+        </select>
+
+        <div class="day-selector">
+            <button class="day-btn" onclick="setDay(this, '1 DAY')">1 DAY</button>
+            <button class="day-btn" onclick="setDay(this, '2 DAYS')">2 DAYS</button>
+            <button class="day-btn" onclick="setDay(this, '3 DAYS')">3 DAYS</button>
+        </div>
+
+        <button class="submit-btn" id="subBtn" onclick="startProcess()">ACTIVATE ACCESS</button>
+
+        <div class="social-container">
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+        </div>
     </div>
 
-    <div class="card">
-
-        <div id="main-dashboard">
-
-            <div class="header-container">
-
-                <div class="logo-wrapper">
-                    <img src="image_f07e8b.jpg"
-                         class="panel-logo"
-                         alt="Logo">
-                </div>
-
-                <div class="header-text">
-                    <div class="status-header">
-                        <div class="dot"></div>
-                        SERVER ONLINE
-                    </div>
-
-                    <h1>NHE UID TRIAL</h1>
-                </div>
-
-            </div>
-
-            <input type="text" id="name" placeholder="ENTER GAME NAME">
-
-            <input type="number" id="uid" placeholder="ENTER GAME UID">
-
-            <div class="select-wrapper">
-                <select id="server">
-
-                    <option value="" disabled selected>
-                        SELECT SERVER
-                    </option>
-
-                    <option value="BANGLADESH BD">
-                        BANGLADESH BD
-                    </option>
-
-                    <option value="INDIA IN">
-                        INDIA IN
-                    </option>
-
-                    <option value="PAKISTAN PAK">
-                        PAKISTAN PAK
-                    </option>
-
-                    <option value="SINGAPORE SG">
-                        SINGAPORE SG
-                    </option>
-
-                    <option value="BRAZIL BR">
-                        BRAZIL BR
-                    </option>
-
-                </select>
-            </div>
-
-            <div class="day-selector">
-
-                <button class="day-btn"
-                        onclick="setDay(this, '1 DAY')">
-                    1 DAY
-                </button>
-
-                <button class="day-btn"
-                        onclick="setDay(this, '2 DAYS')">
-                    2 DAYS
-                </button>
-
-                <button class="day-btn"
-                        onclick="setDay(this, '3 DAYS')">
-                    3 DAYS
-                </button>
-
-            </div>
-
-            <button class="submit-btn"
-                    id="subBtn"
-                    onclick="startProcess()">
-                ACTIVATE ACCESS
-            </button>
-
-            <div class="social-container">
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-youtube"></i>
-                </a>
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-discord"></i>
-                </a>
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-telegram"></i>
-                </a>
-
-            </div>
-
-            <div class="dev-footer">
-                CREATED BY <span>KILLER</span>
-            </div>
-
-        </div>
-
-        <div id="loader-screen">
-
-            <div class="spinner"></div>
-
-            <h2 id="timer"
-                style="font-family:'Orbitron'; color:var(--primary); font-size:40px;">
-                10
-            </h2>
-
-            <p id="status-text"
-               style="color:var(--secondary); margin-top:10px;">
-                CONNECTING...
-            </p>
-
-        </div>
-
-        <div id="success-screen">
-
-            <h2 style="color:var(--primary); font-family:'Orbitron';">
-                ACCESS GRANTED
-            </h2>
-
-            <div id="summary"
-                 style="margin:20px 0;
-                    text-align:left;
-                    background:rgba(0,0,0,0.2);
-                    padding:15px;
-                    border-radius:10px;">
-            </div>
-
-            <button class="submit-btn"
-                    onclick="location.reload()">
-                NEW REQUEST
-            </button>
-
-        </div>
-
+    <!-- Loader -->
+    <div id="loader-screen">
+        <div class="spinner"></div>
+        <h2 id="timer" style="font-family:'Orbitron'; color:var(--primary); font-size:40px;">10</h2>
+        <p id="status-text" style="color:var(--secondary); margin-top:10px;">CONNECTING...</p>
     </div>
 
-    <script>
+    <!-- Success -->
+    <div id="success-screen">
+        <h2 style="color:var(--primary); font-family:'Orbitron';">ACCESS GRANTED</h2>
+        <div id="summary" style="margin:20px 0; text-align:left; background:rgba(0,0,0,0.2); padding:15px; border-radius:10px;"></div>
+        <button class="submit-btn" onclick="location.reload()">NEW REQUEST</button>
+    </div>
+</div>
 
-        let selectedTime = "";
+<script>
+    // ==========================================
+    // 💡 SERVER CONTROL: 
+    // true = Online, false = Offline
+    // ==========================================
+    let isServerOnline = false; 
+    // ==========================================
 
-        const statusMsgs = [
-        "Bypassing Security...",
-        "Injecting UID...",
-        "Syncing Database...",
-        "Done!"
-        ];
+    let selectedTime = "";
+    const statusMsgs = ["Bypassing Security...", "Injecting UID...", "Syncing Database...", "Done!"];
 
-        function setDay(btn, val){
+    // Initialize Server Status
+    window.onload = function() {
+        const label = document.getElementById("status-label");
+        const dot = document.getElementById("status-dot");
+        const btn = document.getElementById("subBtn");
 
-        document.querySelectorAll('.day-btn')
-        .forEach(b => b.classList.remove('active'));
-
-        btn.classList.add('active');
-
-        selectedTime = val;
+        if(isServerOnline) {
+            label.innerText = "SERVER ONLINE";
+            label.className = "online-status";
+            dot.className = "dot online";
+        } else {
+            label.innerText = "SERVER OFFLINE";
+            label.className = "offline-status";
+            dot.className = "dot offline";
+            btn.innerText = "SERVER IS OFF";
+            btn.disabled = true; // বাটন অফ করে দেওয়া হলো
         }
+    }
 
-        // --- TELEGRAM NOTIFICATION FUNCTION ---
-        function sendTelegramMessage(name, uid, server, time) {
-        const botToken = "8475138855:AAFQMWnAHUJqGsx06QZFw60lXugY15ynkig"; // Your Token
-        const chatId = "8135816344"; // Your Chat ID
+    function setDay(btn, val){
+        if(!isServerOnline) return;
+        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedTime = val;
+    }
+
+    function sendTelegramMessage(name, uid, server, time) {
+        const botToken = "8475138855:AAFQMWnAHUJqGsx06QZFw60lXugY15ynkig";
+        const chatId = "8135816344";
         const message = `🔥 *NEW TRIAL REQUEST* 🔥\n\n👤 Name: ${name}\n🆔 UID: ${uid}\n🌍 Server: ${server}\n⏳ Validity: ${time}`;
 
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "Markdown"
-        })
-        })
-        .then(response => console.log("Sent to Telegram"))
-        .catch(error => console.error("Error:", error));
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" })
+        });
+    }
+
+    function startProcess(){
+        if(!isServerOnline) {
+            alert("Server is currently OFFLINE!");
+            return;
         }
 
-        function startProcess(){
-
-        const name =
-        document.getElementById("name").value;
-
-        const uid =
-        document.getElementById("uid").value;
-
-        const server =
-        document.getElementById("server").value;
+        const name = document.getElementById("name").value;
+        const uid = document.getElementById("uid").value;
+        const server = document.getElementById("server").value;
 
         if(!name || !uid || !selectedTime || !server){
-        alert("Please fill all fields!");
-        return;
+            alert("Please fill all fields!");
+            return;
         }
 
-        // Send data to Telegram immediately
         sendTelegramMessage(name, uid, server, selectedTime);
 
-        document.getElementById("main-dashboard")
-        .style.display = "none";
-
-        document.getElementById("loader-screen")
-        .style.display = "block";
+        document.getElementById("main-dashboard").style.display = "none";
+        document.getElementById("loader-screen").style.display = "block";
 
         let time = 10;
-
         let countdown = setInterval(() => {
+            time--;
+            document.getElementById("timer").innerText = time;
+            if(time % 3 == 0){
+                document.getElementById("status-text").innerText = statusMsgs[Math.floor(Math.random() * statusMsgs.length)];
+            }
+            if(time <= 0){
+                clearInterval(countdown);
+                showFinal(name, uid, server);
+            }
+        }, 1000);
+    }
 
-        time--;
-
-        document.getElementById("timer")
-        .innerText = time;
-
-        if(time % 3 == 0){
-
-        document.getElementById("status-text")
-        .innerText =
-        statusMsgs[Math.floor(Math.random() * statusMsgs.length)];
-        }
-
-        if(time <= 0){
-
-        clearInterval(countdown);
-
-        showFinal(name, uid, server);
-        }
-
-
-
-
-        },1000);
-        }
-
-        function showFinal(n,u,s){
-
-        document.getElementById("loader-screen")
-        .style.display = "none";
-
-        document.getElementById("success-screen")
-        .style.display = "block";
-
+    function showFinal(n,u,s){
+        document.getElementById("loader-screen").style.display = "none";
+        document.getElementById("success-screen").style.display = "block";
         document.getElementById("summary").innerHTML = `
-        <p>NAME:
-        <span style="color:var(--primary)">
-        ${n}
-        </span>
-        </p>
-
-        <p>UID:
-        <span style="color:var(--primary)">
-        ${u}
-        </span>
-        </p>
-
-        <p>SERVER:
-        <span style="color:var(--primary)">
-        ${s}
-        </span>
-        </p>
-
-        <p>VALIDITY:
-        <span style="color:var(--primary)">
-        ${selectedTime}
-        </span>
-        </p>
+            <p>NAME: <span style="color:var(--primary)">${n}</span></p>
+            <p>UID: <span style="color:var(--primary)">${u}</span></p>
+            <p>SERVER: <span style="color:var(--primary)">${s}</span></p>
+            <p>VALIDITY: <span style="color:var(--primary)">${selectedTime}</span></p>
         `;
-        }
-
-    </script>
+    }
+</script>
 
 </body>
 </html>
