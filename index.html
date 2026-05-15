@@ -1,666 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NHE UID FREE TRIAL - PRO</title>
-    <!-- এই লাইনটি যুক্ত করা হয়েছে -->
-    <link rel="icon" type="image/png" href="logo.png">
-
+    <title>Premium System Update</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --primary: #00ffcc;
-            --secondary: #00d4ff;
-            --danger: #ff0055;
-            --glass-border: rgba(255,255,255,0.1);
-            --card-shadow: 0 0 30px rgba(0,255,204,0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani',sans-serif;
+            --neon-red: #ff003c;
+            --dark-core: #050505;
+            --glass: rgba(255, 0, 60, 0.05);
         }
 
         body {
-            background: #030305;
-            min-height: 100vh;
+            margin: 0;
+            background-color: var(--dark-core);
+            font-family: 'Rajdhani', sans-serif;
+            color: white;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        .bg-animate {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, #0a1128 0%, #030305 100%);
-            z-index: -1;
             overflow: hidden;
         }
 
-        .orb {
+        /* Animated Scanline Effect */
+        body::before {
+            content: " ";
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: var(--secondary);
-            filter: blur(140px);
-            opacity: .15;
-            border-radius: 50%;
-            animation: move 12s infinite alternate ease-in-out;
-        }
-
-        @keyframes move {
-            0% {
-                transform: translate(-10%,-10%);
-            }
-
-            100% {
-                transform: translate(60%,40%);
-            }
-        }
-
-        .card {
-            width: 100%;
-            max-width: 450px;
-            background: rgba(10,10,15,0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 30px;
-            position: relative;
-            box-shadow: var(--card-shadow);
-            z-index: 1;
-        }
-
-            .card::before {
-                content: '';
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                background: linear-gradient(45deg,var(--primary),transparent,var(--secondary));
-                z-index: -1;
-                border-radius: 26px;
-                animation: borderFlow 6s linear infinite;
-                opacity: .4;
-            }
-
-        @keyframes borderFlow {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-
-            100% {
-                filter: hue-rotate(360deg);
-            }
-        }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .logo-wrapper {
-            width: 85px;
-            height: 85px;
-            flex-shrink: 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-            .logo-wrapper::before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                background: linear-gradient( 45deg, #00ffcc, #00d4ff, #ff0055, #00ffcc );
-                background-size: 400% 400%;
-                animation: neonRotate 6s linear infinite;
-                padding: 3px;
-                z-index: -1;
-                filter: blur(2px);
-            }
-
-            .logo-wrapper::after {
-                content: '';
-                position: absolute;
-                inset: 6px;
-                background: rgba(0,0,0,0.7);
-                border-radius: 50%;
-                border: 1px solid rgba(255,255,255,0.08);
-                z-index: -1;
-                backdrop-filter: blur(8px);
-            }
-
-        .panel-logo {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.15);
-            animation: logoPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes neonRotate {
-            0% {
-                background-position: 0% 50%;
-                transform: rotate(0deg);
-            }
-
-            100% {
-                background-position: 400% 50%;
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes logoPulse {
-            0%,100% {
-                transform: scale(1);
-                box-shadow: 0 0 15px #00ffcc;
-            }
-
-            50% {
-                transform: scale(1.08);
-                box-shadow: 0 0 35px #00d4ff;
-            }
-        }
-       
-        h1 {
-            font-family: 'Orbitron';
-            font-size: 22px;
-            background: linear-gradient(to right,#fff,var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .status-header {
-            font-family: 'Orbitron';
-            font-size: 10px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 5px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%,100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: .2;
-            }
-        }
-
-        input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 14px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            color: white;
-            outline: none;
-        }
-
-        .select-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        select {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            padding: 14px;
-            border-radius: 12px;
-            color: white;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-            select option {
-                background: #0d1117;
-                color: white;
-            }
-
-        .select-wrapper::after {
-            content: '\f107';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            color: var(--primary);
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            z-index: 100;
             pointer-events: none;
         }
 
-        .day-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+        .main-frame {
+            position: relative;
+            padding: 40px;
+            border: 1px solid var(--neon-red);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            text-align: center;
+            min-width: 450px;
+            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
         }
 
-        .day-btn {
-            flex: 1;
-            padding: 12px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 8px;
             color: #fff;
-            font-family: 'Orbitron';
-            font-size: 11px;
-            cursor: pointer;
-            transition: .3s;
+            text-shadow: 0 0 15px var(--neon-red);
+            margin: 0;
         }
 
-            .day-btn.active {
-                background: var(--primary);
-                color: #000;
-                font-weight: 900;
-                box-shadow: 0 0 20px var(--primary);
-            }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg,var(--danger),#ff1a66);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Orbitron';
-            font-weight: 700;
-            cursor: pointer;
-            transition: .3s;
-        }
-
-            .submit-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 0 25px rgba(255,0,85,0.4);
-            }
-
-        .social-container {
+        .live-info {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-between;
             margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
+            border-top: 1px solid rgba(255, 0, 60, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            background: rgba(0, 0, 0, 0.4);
         }
 
-        .social-icon {
+        .time-box, .date-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            color: var(--neon-red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: #111;
+            margin-top: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 60, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--neon-red);
+            box-shadow: 0 0 20px var(--neon-red);
+            width: 0%;
+            animation: load 3s infinite ease-in-out;
+        }
+
+        @keyframes load {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 100%; transform: translateX(0); }
+            100% { width: 0%; transform: translateX(100%); }
+        }
+
+        /* Button Styling */
+        .more-update-btn {
+            margin-top: 25px;
+            background: transparent;
+            border: 1px solid var(--neon-red);
             color: white;
-            font-size: 20px;
-            transition: .4s;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-transform: uppercase;
         }
 
-            .social-icon:hover {
-                color: var(--primary);
-                transform: translateY(-5px);
-            }
+        .more-update-btn:hover {
+            background: var(--neon-red);
+            box-shadow: 0 0 15px var(--neon-red);
+        }
 
-        .dev-footer {
-            font-size: 10px;
-            text-align: center;
+        /* Hidden Content Styling */
+        #updateList {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            text-align: left;
+            margin-top: 15px;
+            border-left: 2px solid var(--neon-red);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .update-item {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255, 0, 60, 0.1);
+        }
+
+        .update-item b {
+            color: var(--neon-red);
+        }
+
+        .footer-tag {
             margin-top: 20px;
-            color: #777;
-            font-family: 'Orbitron';
-        }
-
-            .dev-footer span {
-                color: var(--primary);
-            }
-
-        #loader-screen,
-        #success-screen {
-            display: none;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            margin: 20px auto;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+            font-size: 0.8rem;
+            opacity: 0.6;
+            letter-spacing: 3px;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="bg-animate">
-        <div class="orb"></div>
-    </div>
-
-    <div class="card">
-
-        <div id="main-dashboard">
-
-            <div class="header-container">
-
-                <div class="logo-wrapper">
-                   <img src="logo.png"
-                         class="panel-logo"
-                         alt="Logo">
-                </div>
-
-                <div class="header-text">
-                    <div class="status-header">
-                        <div class="dot"></div>
-                        SERVER ONLINE
-                    </div>
-
-                    <h1>NHE UID TRIAL</h1>
-                </div>
-
+    <div class="main-frame">
+        <h1 class="header-title">WEBSITE UPDATE</h1>
+        
+        <div class="live-info">
+            <div class="date-box">
+                <span class="label">DATE // YEAR</span>
+                <span id="liveDate" class="value">00-00-2026</span>
             </div>
-
-            <input type="text" id="name" placeholder="ENTER GAME NAME">
-
-            <input type="number" id="uid" placeholder="ENTER GAME UID">
-
-            <div class="select-wrapper">
-                <select id="server">
-
-                    <option value="" disabled selected>
-                        SELECT SERVER
-                    </option>
-
-                    <option value="BANGLADESH BD">
-                        BANGLADESH BD
-                    </option>
-
-                    <option value="INDIA IN">
-                        INDIA IN
-                    </option>
-
-                    <option value="PAKISTAN PAK">
-                        PAKISTAN PAK
-                    </option>
-
-                    <option value="SINGAPORE SG">
-                        SINGAPORE SG
-                    </option>
-
-                    <option value="BRAZIL BR">
-                        BRAZIL BR
-                    </option>
-
-                    <option value="INDONESIA ID">
-                        INDONESIA ID
-                    </option>
-
-                    <option value="THAILAND TH">
-                        THAILAND TH
-                    </option>
-
-                    <option value="VIETNAM VN">
-                        VIETNAM VN
-                    </option>
-
-                    <option value="OTHER SERVER">
-                        OTHER SERVER
-                    </option>
-
-                </select>
+            <div class="time-box">
+                <span class="label">LOCAL TIME</span>
+                <span id="liveTime" class="value">00:00:00</span>
             </div>
-
-            <div class="day-selector">
-
-                <button class="day-btn"
-                        onclick="setDay(this, '1 DAY')">
-                    1 DAY
-                </button>
-
-                <button class="day-btn"
-                        onclick="setDay(this, '2 DAYS')">
-                    2 DAYS
-                </button>
-
-                <button class="day-btn"
-                        onclick="setDay(this, '3 DAYS')">
-                    3 DAYS
-                </button>
-
-            </div>
-
-            <button class="submit-btn"
-                    id="subBtn"
-                    onclick="startProcess()">
-                ACTIVATE ACCESS
-            </button>
-
-            <div class="social-container">
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-youtube"></i>
-                </a>
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-discord"></i>
-                </a>
-
-                <a href="#" class="social-icon">
-                    <i class="fab fa-telegram"></i>
-                </a>
-
-            </div>
-
-            <div class="dev-footer">
-                CREATED BY <span>KILLER</span>
-            </div>
-
         </div>
 
-        <div id="loader-screen">
-
-            <div class="spinner"></div>
-
-            <h2 id="timer"
-                style="font-family:'Orbitron'; color:var(--primary); font-size:40px;">
-                10
-            </h2>
-
-            <p id="status-text"
-               style="color:var(--secondary); margin-top:10px;">
-                CONNECTING...
-            </p>
-
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
         </div>
 
-        <div id="success-screen">
+        <button class="more-update-btn" onclick="toggleUpdate()">More Update</button>
 
-            <h2 style="color:var(--primary); font-family:'Orbitron';">
-                ACCESS GRANTED
-            </h2>
-
-            <div id="summary"
-                 style="margin:20px 0;
-                    text-align:left;
-                    background:rgba(0,0,0,0.2);
-                    padding:15px;
-                    border-radius:10px;">
-            </div>
-
-            <button class="submit-btn"
-                    onclick="location.reload()">
-                NEW REQUEST
-            </button>
-
+        <div id="updateList">
+            <div class="update-item"><b>[FIX]</b> UID Server Speed Optimized (Fast)</div>
+            <div class="update-item"><b>[FIX]</b> Network Connection Problem Fixed</div>
         </div>
 
+        <div class="footer-tag">STATUS: CORE EVOLUTION IN PROGRESS</div>
     </div>
 
     <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveTime').innerText = `${hours}:${minutes}:${seconds}`;
 
-        let selectedTime = "";
-
-        const statusMsgs = [
-        "Bypassing Security...",
-        "Injecting UID...",
-        "Syncing Database...",
-        "Done!"
-        ];
-
-        function setDay(btn, val){
-
-        document.querySelectorAll('.day-btn')
-        .forEach(b => b.classList.remove('active'));
-
-        btn.classList.add('active');
-
-        selectedTime = val;
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = now.toLocaleString('default', { month: 'short' }).toUpperCase();
+            const year = now.getFullYear();
+            document.getElementById('liveDate').innerText = `${day} ${month} ${year}`;
         }
 
-        // --- TELEGRAM NOTIFICATION FUNCTION ---
-        function sendTelegramMessage(name, uid, server, time) {
-        const botToken = "8475138855:AAFQMWnAHUJqGsx06QZFw60lXugY15ynkig"; // Your Token
-        const chatId = "8135816344"; // Your Chat ID
-        const message = `🔥 *NEW TRIAL REQUEST* 🔥\n\n👤 Name: ${name}\n🆔 UID: ${uid}\n🌍 Server: ${server}\n⏳ Validity: ${time}`;
-
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "Markdown"
-        })
-        })
-        .then(response => console.log("Sent to Telegram"))
-        .catch(error => console.error("Error:", error));
+        function toggleUpdate() {
+            const list = document.getElementById('updateList');
+            if (list.style.maxHeight === "0px" || list.style.maxHeight === "") {
+                list.style.maxHeight = "200px";
+                list.style.padding = "10px 0";
+            } else {
+                list.style.maxHeight = "0px";
+                list.style.padding = "0";
+            }
         }
 
-        function startProcess(){
-
-        const name =
-        document.getElementById("name").value;
-
-        const uid =
-        document.getElementById("uid").value;
-
-        const server =
-        document.getElementById("server").value;
-
-        if(!name || !uid || !selectedTime || !server){
-        alert("Please fill all fields!");
-        return;
-        }
-
-        // Send data to Telegram immediately
-        sendTelegramMessage(name, uid, server, selectedTime);
-
-        document.getElementById("main-dashboard")
-        .style.display = "none";
-
-        document.getElementById("loader-screen")
-        .style.display = "block";
-
-        let time = 10;
-
-        let countdown = setInterval(() => {
-
-        time--;
-
-        document.getElementById("timer")
-        .innerText = time;
-
-        if(time % 3 == 0){
-
-        document.getElementById("status-text")
-        .innerText =
-        statusMsgs[Math.floor(Math.random() * statusMsgs.length)];
-        }
-
-        if(time <= 0){
-
-        clearInterval(countdown);
-
-        showFinal(name, uid, server);
-        }
-
-
-
-
-        },1000);
-        }
-
-        function showFinal(n,u,s){
-
-        document.getElementById("loader-screen")
-        .style.display = "none";
-
-        document.getElementById("success-screen")
-        .style.display = "block";
-
-        document.getElementById("summary").innerHTML = `
-        <p>NAME:
-        <span style="color:var(--primary)">
-        ${n}
-        </span>
-        </p>
-
-        <p>UID:
-        <span style="color:var(--primary)">
-        ${u}
-        </span>
-        </p>
-
-        <p>SERVER:
-        <span style="color:var(--primary)">
-        ${s}
-        </span>
-        </p>
-
-        <p>VALIDITY:
-        <span style="color:var(--primary)">
-        ${selectedTime}
-        </span>
-        </p>
-        `;
-        }
-
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 
 </body>
