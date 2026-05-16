@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium System Update</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-red: #ff003c;
+            --dark-core: #050505;
+            --glass: rgba(255, 0, 60, 0.05);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--dark-core);
+            font-family: 'Rajdhani', sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animated Scanline Effect */
+        body::before {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .main-frame {
+            position: relative;
+            padding: 40px;
+            border: 1px solid var(--neon-red);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            text-align: center;
+            min-width: 450px;
+            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-red);
+            margin: 0;
+        }
+
+        .live-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 0, 60, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .time-box, .date-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            color: var(--neon-red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: #111;
+            margin-top: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 60, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--neon-red);
+            box-shadow: 0 0 20px var(--neon-red);
+            width: 0%;
+            animation: load 3s infinite ease-in-out;
+        }
+
+        @keyframes load {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 100%; transform: translateX(0); }
+            100% { width: 0%; transform: translateX(100%); }
+        }
+
+        /* Button Styling */
+        .more-update-btn {
+            margin-top: 25px;
+            background: transparent;
+            border: 1px solid var(--neon-red);
+            color: white;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .more-update-btn:hover {
+            background: var(--neon-red);
+            box-shadow: 0 0 15px var(--neon-red);
+        }
+
+        /* Hidden Content Styling */
+        #updateList {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            text-align: left;
+            margin-top: 15px;
+            border-left: 2px solid var(--neon-red);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .update-item {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255, 0, 60, 0.1);
+        }
+
+        .update-item b {
+            color: var(--neon-red);
+        }
+
+        .footer-tag {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-frame">
+        <h1 class="header-title">WEBSITE UPDATE</h1>
+        
+        <div class="live-info">
+            <div class="date-box">
+                <span class="label">DATE // YEAR</span>
+                <span id="liveDate" class="value">00-00-2026</span>
+            </div>
+            <div class="time-box">
+                <span class="label">LOCAL TIME</span>
+                <span id="liveTime" class="value">00:00:00</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <button class="more-update-btn" onclick="toggleUpdate()">More Update</button>
+
+        <div id="updateList">
+            <div class="update-item"><b>[FIX]</b> UID Server Speed Optimized (Fast)</div>
+            <div class="update-item"><b>[FIX]</b> Network Connection Problem Fixed</div>
+        </div>
+
+        <div class="footer-tag">STATUS: CORE EVOLUTION IN PROGRESS</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('liveTime').innerText = `${hours}:${minutes}:${seconds}`;
+
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = now.toLocaleString('default', { month: 'short' }).toUpperCase();
+            const year = now.getFullYear();
+            document.getElementById('liveDate').innerText = `${day} ${month} ${year}`;
+        }
+
+        function toggleUpdate() {
+            const list = document.getElementById('updateList');
+            if (list.style.maxHeight === "0px" || list.style.maxHeight === "") {
+                list.style.maxHeight = "200px";
+                list.style.padding = "10px 0";
+            } else {
+                list.style.maxHeight = "0px";
+                list.style.padding = "0";
+            }
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+</body>
+</html>
