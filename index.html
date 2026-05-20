@@ -309,7 +309,7 @@
         });
 
         // 📊 ইউজার কাউন্টার লজিক (ইউআরএল ভিত্তিক ১০০০ লিমিট কন্ট্রোলার)
-        const maxLimit = 1000;
+        const maxLimit = 100;
         const storageKey = "uid_counter_value_" + window.location.hostname + window.location.pathname.replace(/[^a-zA-Z0-9]/g, "");
         
         let currentCount = localStorage.getItem(storageKey);
