@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <style>
         :root {
             --primary-green: #00ff66;
@@ -188,17 +191,6 @@
 
         .submit-btn:hover i { transform: translateX(5px); }
 
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -50%; width: 30%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
-            transform: skewX(-25deg);
-            transition: 0.75s;
-        }
-
-        .submit-btn:hover::after { left: 120%; }
-
         .loader-node {
             display: none;
             margin-top: 15px;
@@ -242,6 +234,22 @@
             transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 25px rgba(0, 255, 102, 0.15);
         }
+
+        /* অফলাইন মোডের ব্যানার */
+        .offline-notice {
+            display: none;
+            color: var(--danger);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            border: 1px dashed var(--danger);
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 0, 85, 0.05);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -273,6 +281,11 @@
                 <span>Claim Free Access</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
+        </div>
+
+        <div id="offline-container" class="offline-notice">
+            <i class="fa-solid fa-circle-exclamation" style="margin-right: 8px;"></i>
+            Server Offline! Try Again Later.
         </div>
 
         <div id="loader-screen" class="loader-node">
@@ -311,37 +324,61 @@
         // ================= [ 🛠️ SERVER CONFIGURATION ] =================
         const maxLimit = 100; 
         const discordWebhookURL = "https://discordapp.com/api/webhooks/1506649694816964628/l26dH7LB9gD5NaAd-5mtzq7CKpN9iZjVcZMNBFCz8t3raBlJnfwZmoeVpSJyclp-KAAa"; 
-        const isServerOnline = true; 
 
-        // 🔗 আপনার ফায়ারবেজ লিংকটি নিচে নিখুঁতভাবে সেট করা হলো
-        const firebaseDatabaseURL = "https://nazim69x-92451-default-rtdb.firebaseio.com/";
+        // ফায়ারবেজ কনফিগ (SDK ইনিশিয়ালাইজেশন)
+        const firebaseConfig = {
+            databaseURL: "https://nazim69x-92451-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
         // ===============================================================
 
-        // ইউনিক পাথ হ্যান্ডলার (লোকালহোস্ট বা ডোমেন অনুযায়ী পাথ ক্লিনিং)
+        // ইউনিক পাথ জেনারেটর (গিটহাব ডোমেন ট্র্যাকিং)
         let webPathKey = window.location.hostname ? window.location.hostname + window.location.pathname : "localhost";
         webPathKey = webPathKey.replace(/[^a-zA-Z0-9]/g, "");
-        
-        const finalCounterEndpoint = `${firebaseDatabaseURL}counters/${webPathKey}.json`;
+
+        // ডাটাবেজ রেফারেন্স রুটস
+        const counterRef = database.ref(`counters/${webPathKey}`);
+        const serverStatusRef = database.ref('counters/server_status');
+        const connectedRef = database.ref(".info/connected");
 
         let currentCount = 0;
+        let globalServerOnline = false;
 
-        function fetchLiveDatabaseCounter() {
-            fetch(finalCounterEndpoint)
-            .then(res => res.json())
-            .then(data => {
-                // ডাটাবেজে ডেটা না থাকলে (null হলে) ১Contextমেটিকভাবে ০ (শূন্য) বসবে, NaN আসবে না।
-                currentCount = (data !== null && !isNaN(data)) ? parseInt(data) : 0;
-                document.getElementById("live-counter").innerText = currentCount + " / " + maxLimit;
-            })
-            .catch(err => { 
-                // ডাটাবেজ রেডি না থাকলেও সেফটি জোন হিসেবে ০ দেখাবে
-                document.getElementById("live-counter").innerText = currentCount + " / " + maxLimit;
-            });
-        }
+        // 🔌 লাইভ অটো-ডিসকানেক্ট ট্র্যাকিং মেকানিজম (Dead Man's Switch)
+        connectedRef.on("value", (snap) => {
+            if (snap.val() === true) {
+                // আপনি যখনই এই পেজ বা অ্যাডমিন হিসেবে এটি ওপেন রাখবেন, সার্ভার অন হবে
+                serverStatusRef.set("ONLINE");
 
-        // লাইভ অটো সিঙ্ক প্রতি ৩ সেকেন্ড পর পর
-        setInterval(fetchLiveDatabaseCounter, 3000); 
-        fetchLiveDatabaseCounter();
+                // পিসির কারেন্ট চলে গেলে বা ট্যাব ক্লোজ করলে ফায়ারবেজ অটোমেটিক এটাকে OFFLINE করে দেবে
+                serverStatusRef.onDisconnect().set("OFFLINE");
+            }
+        });
+
+        // 📡 সার্ভার স্ট্যাটাস এবং লাইভ কাউন্টার লিসেনার (Realtime Live Sync)
+        database.ref('counters').on("value", (snapshot) => {
+            const data = snapshot.val();
+            
+            // ১. সার্ভার স্ট্যাটাস চেক
+            if(data && data.server_status === "ONLINE") {
+                globalServerOnline = true;
+                document.getElementById("form-container").style.display = "block";
+                document.getElementById("offline-container").style.display = "none";
+            } else {
+                globalServerOnline = false;
+                document.getElementById("form-container").style.display = "none";
+                document.getElementById("offline-container").style.display = "block";
+            }
+
+            // ২. রেজিস্টার্ড ইউজার কাউন্টার চেক
+            if(data && data[webPathKey] !== undefined) {
+                currentCount = parseInt(data[webPathKey]);
+            } else {
+                currentCount = 0;
+            }
+            document.getElementById("live-counter").innerText = currentCount + " / " + maxLimit;
+        });
 
         function showNotification(msg, isError = false) {
             const toast = document.getElementById("status-toast");
@@ -353,6 +390,11 @@
         }
 
         async function processTrialRequest() {
+            if (!globalServerOnline) {
+                showNotification("SERVER IS OFFLINE!", true);
+                return;
+            }
+
             if (currentCount >= maxLimit) {
                 showNotification("REGISTRATION FULL! LIMIT REACHED.", true);
                 return;
@@ -364,11 +406,6 @@
             if (!uidValue) {
                 showNotification("PLEASE ENTER A VALID GAME UID!", true);
                 return;
-            }
-
-            if (isServerOnline === false) {
-                showNotification("SERVER OFFLINE! PLEASE TRY AGAIN LATER.", true);
-                return; 
             }
 
             document.getElementById("form-container").style.display = "none";
@@ -418,16 +455,9 @@
             .then(async res => {
                 if (!res.ok) throw new Error("Discord Rejected");
 
-                // নতুন কাউন্ট ডাটাবেজে পুশ করা হচ্ছে
+                // ফায়ারবেজ লাইভ কাউন্ট আপডেট
                 const updatedCountValue = currentCount + 1;
-                await fetch(finalCounterEndpoint, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(updatedCountValue)
-                });
-
-                currentCount = updatedCountValue;
-                document.getElementById("live-counter").innerText = currentCount + " / " + maxLimit;
+                await counterRef.set(updatedCountValue);
 
                 let timeLeft = 10;
                 const timerElement = document.getElementById("timer-text");
